@@ -66,7 +66,7 @@ services:
     container_name: backend
     image: medaziz11/uptimekuma_restapi
     volumes:
-      - api:/db
+      - api:/db:rwx
     restart: always
     environment:
       - KUMA_SERVER=http://kuma:3001
@@ -91,7 +91,7 @@ volumes:
 
 ```bash
 
-    TOKEN=$(curl -X -L 'POST' -H 'Content-Type: application/x-www-form-urlencoded' --data 'username=admin&password=admin' http://127.0.0.1:8000/login/access-token/ | jq -r ".access_token")
+    TOKEN=$(curl -L  -X 'POST' -H 'Content-Type: application/x-www-form-urlencoded' --data 'username=admin&password=admin' http://127.0.0.1:8000/login/access-token/ | jq -r ".access_token")
 
     curl -L -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" http://127.0.0.1:8000/monitors/
 
